@@ -23,4 +23,11 @@ net.createServer((connection) =>{
         }
         broadcast(connection.nickname + ' > ' + message, connection);
     });
-}).listen(5000);
+    connection.on('end', ()=>{
+        broadcast(connection.nickname + ' has left!', connection);
+        connections.splice(connections.indexOf(connection), 1);
+    })
+    
+}).listen(5000, ()=>{
+    console.log('Servidor ok');
+});

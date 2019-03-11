@@ -9,6 +9,10 @@ client.on('data', (message)=>{
     console.log(message.toString());
 });
 
+client.on('end', ()=> {
+    process.exit();
+});
+
 process.stdin.on('readable', ()=>{
     var message = process.stdin.read();
     if (!message) return;
